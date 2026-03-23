@@ -2,19 +2,28 @@
 
 ## Good Learnings (save these)
 
-### Project Memory Examples
+### Global User Memory (`~/.claude/CLAUDE.md` + topic files)
+Things that are true regardless of which project you're in:
+- "Uses bun as package manager — never suggest npm or yarn"
+- "Commits only when explicitly asked"
+- "Prefers TypeScript strict mode"
+- "Uses tmux — terminal commands should account for split panes"
+- "Prefers functional components over class components"
+- "Likes code comments only for non-obvious logic"
+
+### Project Memory (`CLAUDE.md` in repo root)
+Things specific to this codebase that the whole team should know:
 - "Monorepo with apps/ for services and packages/ for shared libs"
 - "Uses custom ESLint rule X — don't suggest disabling it"
 - "Database migrations must be backwards-compatible (rolling deploys)"
 - "Component tests use Testing Library, not Enzyme"
-- "Auth tokens are stored in httpOnly cookies, not localStorage"
+- "Auth tokens stored in httpOnly cookies, not localStorage"
 
-### User Memory Examples
-- "Prefers TypeScript strict mode in all projects"
-- "Wants git commits only when explicitly asked"
-- "Uses tmux — terminal commands should account for that"
-- "Prefers functional components over class components"
-- "Likes detailed code comments for complex algorithms only"
+### Personal Project Memory (`~/.claude/projects/.../memory/`)
+Personal notes about this project that shouldn't go in the repo:
+- "Local dev requires VPN to reach staging DB"
+- "The payments service is flaky locally — always test on staging"
+- "Ask before touching anything in the legacy/ folder — it's being migrated"
 
 ## Bad Learnings (don't save these)
 
@@ -33,34 +42,67 @@
 
 ## File Format Conventions
 
-### CLAUDE.md Structure
+### `~/.claude/CLAUDE.md` (global index — keep lean)
 ```markdown
-# Project Conventions
+# User Preferences
+
+Short pointers only — details live in topic files.
+
+## Workflow
+- Commit only when explicitly asked
+- See [preferences.md](preferences.md) for full workflow preferences
 
 ## Code Style
-- [conventions here]
+- TypeScript strict mode in all projects
+- See [patterns.md](patterns.md) for detailed patterns
+
+## Tools
+- Package manager: bun
+- See [preferences.md](preferences.md) for full tool preferences
+```
+
+### `~/.claude/preferences.md` (global topic file example)
+```markdown
+# Preferences
+
+## Workflow
+- Only create git commits when explicitly asked
+- Prefer editing existing files over creating new ones
+- Ask before pushing to remote
+
+## Tools
+- Package manager: bun (never npm or yarn)
+- Uses tmux for terminal sessions
+
+## Communication
+- Keep responses concise
+- Skip filler phrases and preamble
+```
+
+### Project `CLAUDE.md`
+```markdown
+# Project Conventions
 
 ## Architecture
 - [decisions here]
 
+## Code Style
+- [conventions here]
+
 ## Testing
 - [approaches here]
-
-## Workflow
-- [preferences here]
 ```
 
-### MEMORY.md Structure
+### Personal project `MEMORY.md`
 ```markdown
-# User Preferences
+# Notes on <project-name>
 
-## Workflow
-- [cross-project preferences]
-- See [workflow.md](workflow.md) for details
+## Setup
+- [local setup quirks]
 
-## Communication Style
-- [how the user likes to interact]
+## Watch out for
+- [personal reminders]
 
-## Tools
-- [preferred tools and configurations]
+## See also
+- [topic-file.md](topic-file.md) for details
 ```
